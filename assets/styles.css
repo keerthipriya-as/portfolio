@@ -766,6 +766,10 @@ body {
 
 
 @media screen and (max-width: 480px) {
+  .animated-intro .name-title{
+	  font-size: 1.5rem;
+  }
+	
   .glass-card {
     height: auto;         
     padding: 1rem;
