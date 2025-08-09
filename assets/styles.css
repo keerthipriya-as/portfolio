@@ -18,6 +18,42 @@ body {
 	
 }
 
+.bounce-heading-experience::before{
+	content: '💼 Professional Experience';
+    display: inline-block;
+    animation: bounceIcon 2.5s infinite ease-in-out;
+    margin-right: 6px;
+ }
+ 
+ .bounce-heading-skills::before{
+	content: '🛠️ Technical Skills';
+    display: inline-block;
+    animation: bounceIcon 2.5s infinite ease-in-out;
+    margin-right: 6px;
+ }
+ 
+ .bounce-heading-awards::before{
+	content: '🏆 Awards & Recognitions';
+    display: inline-block;
+    animation: bounceIcon 2.5s infinite ease-in-out;
+    margin-right: 6px;
+ }
+
+.bounce-heading-certificate::before{
+	content: '📜 Certificates';
+    display: inline-block;
+    animation: bounceIcon 2.5s infinite ease-in-out;
+    margin-right: 6px;
+ }
+
+.bounce-heading-education::before{
+	content: '🎓 Education';
+    display: inline-block;
+    animation: bounceIcon 2.5s infinite ease-in-out;
+    margin-right: 6px;
+ }
+
+
 /* Scrollbar  */
 ::-webkit-scrollbar {
     width: 8px;
@@ -151,6 +187,12 @@ body {
     animation: fadeIn 3s ease-in-out infinite alternate;
 }
 
+.fade-text::before {
+    content: "👋 Hello! I'm a ";
+    display: inline-block;
+    margin-right: 6px;
+ }
+
 @keyframes fadeIn {
     from { opacity: 0.3; }
     to { opacity: 1; }
@@ -197,6 +239,68 @@ body {
     transform: scale(1.05);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
+
+.profile-card {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px 40px;
+    background: linear-gradient(135deg, #f0f4ff, #d9e6ff);
+    border-radius: 16px;
+	color: #1a1a3d;
+    line-height: 1.6;
+    position: relative;
+    overflow: hidden;
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% {
+      box-shadow:
+        0 0 8px 2px rgba(74, 105, 189, 0.4),
+        0 12px 24px rgba(0, 0, 50, 0.1);
+    }
+    50% {
+      box-shadow:
+        0 0 20px 6px rgba(74, 105, 189, 0.8),
+        0 16px 32px rgba(0, 0, 50, 0.15);
+    }
+  }
+
+  .profile-card::before {
+    content: '👩‍💻';
+    font-size: 5rem;
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    opacity: 0.15;
+    user-select: none;
+    animation: floatEmoji 6s ease-in-out infinite;
+  }
+
+  @keyframes floatEmoji {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+  }
+
+  .profile-card p {
+    font-size: 1.15rem;
+    font-weight: 500;
+    text-align: justify;
+    letter-spacing: 0.02em;
+  }
+
+  .highlight {
+    color: #4a69bd;
+    font-weight: 700;
+  }
+
+  .profile-card p span {
+    background: #e1eaff;
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-weight: 600;
+    color: #3050b3;
+  }
 
 
 /* ---------- Skills ---------- */
@@ -317,9 +421,112 @@ body {
 }
 
 .section-header {
-    font-weight: bold;
-    margin: 1rem 0 0.5rem;
-}
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #3a4a8f;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 8px;
+    position: relative;
+    cursor: default;
+    user-select: none;
+  }
+
+  /* Gradient underline */
+  .section-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    width: 60px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #4a69bd, #6a82fb);
+    box-shadow: 0 2px 8px rgba(74, 105, 189, 0.6);
+    transition: width 0.3s ease;
+  }
+
+  /* Hover effect to expand underline */
+  .section-header:hover::after {
+    width: 100%;
+  }
+
+  /* Slight icon bounce animation */
+  .section-header::before {
+    content: '🛠️';
+    display: inline-block;
+    animation: bounceIcon 2.5s infinite ease-in-out;
+    margin-right: 6px;
+  }
+
+  @keyframes bounceIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  
+  
+  
+ .section-body  {
+	list-style-type: none;
+	max-width: 700px;
+    margin: 30px auto;
+    padding-left: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2a2a3d;
+    line-height: 1.7;
+  }
+
+.section-body li {
+	
+    position: relative;
+    background: #f9fbff;
+    margin-bottom: 18px;
+    padding: 18px 20px 18px 45px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(74, 105, 189, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+ .section-body li:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(74, 105, 189, 0.25);
+  }
+
+.section-body  li::before {
+    content: "✔";
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #4a69bd;
+    font-weight: 900;
+    font-size: 1.2rem;
+  }
+
+ .section-body li strong {
+    color: #3050b3;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .section-body {
+      padding-left: 15px;
+    }
+    .section-body  li {
+      padding: 15px 18px 15px 40px;
+    }
+    .section-body  li::before {
+      left: 12px;
+      font-size: 1rem;
+    }
+  }
+
 
 .gradient-5{
 	background: linear-gradient(135deg, rgba(255, 140, 0, 0.6), rgba(255, 223, 0, 0.4));
@@ -668,7 +875,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   max-width: 320px;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .info-card h3 {
@@ -814,6 +1021,11 @@ body {
         flex-direction: unset;
     }
 	
+	.profile-card {
+		margin: 0;
+		padding: 10px 10px;
+	}
+	
 }
 
 @media (max-width: 330px) {
@@ -825,6 +1037,9 @@ body {
 
 
 
+  
+ 
+ 
 
 
 
