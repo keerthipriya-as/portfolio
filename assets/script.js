@@ -1,7 +1,7 @@
 // Typing animation for hero fade-text
 document.addEventListener('DOMContentLoaded', function () {
     const fadeTextEl = document.querySelector('.fade-text');
-    const texts = ["I'm a Certified Salesforce Developer", "I'm a Certified Java Developer", "I'm a PHP Developer"];
+    const texts = ["Certified Salesforce Developer", " Certified Java Developer", " PHP Developer"];
     let index = 0;
     let charIndex = 0;
 
