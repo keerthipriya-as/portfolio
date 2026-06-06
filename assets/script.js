@@ -88,7 +88,35 @@ function createUtterance(introText, voice) {
     return utterance;
 }
 
+function getBrowserName() {
+    const ua = navigator.userAgent;
+    if (/samsungbrowser|samsung/i.test(ua)) return 'samsung';
+    if (/edg/i.test(ua)) return 'edge';
+    if (/opr|opera/i.test(ua)) return 'opera';
+    if (/chrome/i.test(ua) && !/edg/i.test(ua) && !/opr/i.test(ua) && !/samsungbrowser/i.test(ua)) return 'chrome';
+    if (/firefox/i.test(ua)) return 'firefox';
+    if (/safari/i.test(ua) && !/chrome/i.test(ua) && !/chromium/i.test(ua)) return 'safari';
+    return 'unknown';
+}
+
 function findFemaleVoice(voices) {
+    const browser = getBrowserName();
+    const voicePreferences = {
+        chrome: [/Google UK English Female/i, /Google US English/i, /Microsoft Zira Desktop/i, /Samantha/i],
+        edge: [/Microsoft Zira Desktop/i, /Microsoft Hazel Desktop/i, /Google UK English Female/i, /Samantha/i],
+        firefox: [/Samantha/i, /Alloy/i, /Google UK English Female/i, /Microsoft Zira Desktop/i],
+        safari: [/Samantha/i, /Anna/i, /Victoria/i, /Alloy/i],
+        opera: [/Google UK English Female/i, /Microsoft Zira Desktop/i, /Samantha/i],
+        samsung: [/Samantha/i, /Google UK English Female/i, /Microsoft Zira Desktop/i, /Alloy/i],
+        unknown: [/Google UK English Female/i, /Microsoft Zira Desktop/i, /Samantha/i],
+    };
+
+    const preferredPatterns = voicePreferences[browser] || voicePreferences.unknown;
+    for (const pattern of preferredPatterns) {
+        const matched = voices.find(voice => pattern.test(voice.name));
+        if (matched) return matched;
+    }
+
     const femaleVoices = voices.filter(voice => /female|zira|hazel|samantha|amy|eva|alloy/i.test(voice.name + ' ' + voice.lang));
     if (femaleVoices.length) {
         return femaleVoices.find(voice => /english/i.test(voice.lang)) || femaleVoices[0];
