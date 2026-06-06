@@ -37,13 +37,104 @@ function openLinkedIn() {
     window.open("https://www.linkedin.com/in/keerthipriya-a-s/", "_blank");
 }
 
+const heroSpeechState = {
+    utterance: null,
+    isPlaying: false,
+    defaultVoice: null,
+};
+
+function updateHeroActionButton() {
+    const button = document.getElementById('heroActionBtn');
+    if (!button) return;
+    if (heroSpeechState.isPlaying) {
+        button.innerHTML = '<i class="fas fa-stop"></i> Stop';
+        button.setAttribute('aria-pressed', 'true');
+        button.setAttribute('aria-label', 'Stop voiceover');
+    } else {
+        button.innerHTML = '<i class="fas fa-play"></i> Start';
+        button.setAttribute('aria-pressed', 'false');
+        button.setAttribute('aria-label', 'Start voiceover');
+    }
+}
+
+function stopHeroIntro() {
+    if (!heroSpeechState.isPlaying) return;
+    window.speechSynthesis.cancel();
+    heroSpeechState.isPlaying = false;
+    heroSpeechState.utterance = null;
+    const card = document.getElementById('heroGraphic');
+    if (card) card.classList.remove('speaking');
+    updateHeroActionButton();
+}
+
+function createUtterance(introText, voice) {
+    const utterance = new SpeechSynthesisUtterance(introText);
+    utterance.rate = 1;
+    utterance.pitch = 1.05;
+    utterance.lang = 'en-US';
+    if (voice) {
+        utterance.voice = voice;
+    }
+    utterance.onend = function () {
+        heroSpeechState.isPlaying = false;
+        heroSpeechState.utterance = null;
+        const card = document.getElementById('heroGraphic');
+        if (card) card.classList.remove('speaking');
+        updateHeroActionButton();
+    };
+    utterance.onerror = function () {
+        stopHeroIntro();
+    };
+    return utterance;
+}
+
+function findFemaleVoice(voices) {
+    const femaleVoices = voices.filter(voice => /female|zira|hazel|samantha|amy|eva|alloy/i.test(voice.name + ' ' + voice.lang));
+    if (femaleVoices.length) {
+        return femaleVoices.find(voice => /english/i.test(voice.lang)) || femaleVoices[0];
+    }
+    return voices.find(voice => /english/i.test(voice.lang));
+}
+
+function getPreferredHeroVoice() {
+    const voices = window.speechSynthesis.getVoices();
+    return findFemaleVoice(voices) || voices[0] || null;
+}
+
+function toggleHeroVoice() {
+    if (!('speechSynthesis' in window)) {
+        alert('Your browser does not support speech synthesis.');
+        return;
+    }
+    if (heroSpeechState.isPlaying) {
+        stopHeroIntro();
+        return;
+    }
+    const introText = "Hi, I'm Keerthipriya. I'm a software developer focused on Salesforce, with over six years of experience working across Sales Cloud, Service Cloud, Experience Cloud, and Field Service. I also build web applications using JavaScript, Java and PHP. I solve problems passionately and enjoy learning and sharing knowledge with others.";
+    heroSpeechState.defaultVoice = getPreferredHeroVoice();
+    const utterance = createUtterance(introText, heroSpeechState.defaultVoice);
+    heroSpeechState.utterance = utterance;
+    heroSpeechState.isPlaying = true;
+    const card = document.getElementById('heroGraphic');
+    if (card) card.classList.add('speaking');
+    updateHeroActionButton();
+    window.speechSynthesis.speak(utterance);
+}
+
+function initializeHeroVoiceButton() {
+    const button = document.getElementById('heroActionBtn');
+    if (!button) return;
+    button.addEventListener('click', toggleHeroVoice);
+    updateHeroActionButton();
+}
+
+
 
 
 
 
 
 document.addEventListener("DOMContentLoaded", function () {
-	
     const nav = document.getElementById("navLinks");
     const burger = document.getElementById("hamburger");
 
@@ -51,7 +142,14 @@ document.addEventListener("DOMContentLoaded", function () {
         nav.classList.toggle("active");
         burger.classList.toggle("active");
     });
-	
-	
+
+    initializeHeroVoiceButton();
+
+    if (!window.speechSynthesis.getVoices().length) {
+        window.speechSynthesis.onvoiceschanged = function () {
+            heroSpeechState.defaultVoice = getPreferredHeroVoice();
+            window.speechSynthesis.onvoiceschanged = null;
+        };
+    }
 });
 
