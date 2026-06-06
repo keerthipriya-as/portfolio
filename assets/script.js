@@ -230,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function () {
             else if (t.includes('experience') || t.includes('exp')) reply = 'I have 6+ years experience across Sales, Service, Experience Clouds and Field Service, working on custom development, integrations, and web applications.';
             else if (t.includes('contact') || t.includes('email') || t.includes('phone')) reply = 'You can reach me at askeerthipriya99@gmail.com or +91 7010481281.';
             else if (t.includes('hi') || t.includes('hello') || t.includes('hey')) reply = 'Hey! you can ask me about my skills, experience, or how to contact me not any other questions please..! It\'s a simple chatbot built in javascript to demonstrate interactivity on my portfolio site.';
-
+            else if (t.includes('keerthi') || t.includes('priya') || t.includes('keerthipriya')) reply = 'That\'s me! I\'m Keerthipriya, a passionate software developer focused on Salesforce and web technologies. I love solving problems and learning new things.';
             setTimeout(()=> appendMessage(reply, 'bot'), 700);
         }
 
