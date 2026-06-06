@@ -138,7 +138,7 @@ function toggleHeroVoice() {
         stopHeroIntro();
         return;
     }
-    const introText = "Hi, I'm Keerthipriya. I'm a software developer focused on Salesforce, with over six years of experience working across Sales Cloud, Service Cloud, Experience Cloud, and Field Service. I also build web applications using JavaScript, Java and PHP. I solve problems passionately and enjoy learning and sharing knowledge with others.";
+    const introText = "Hi, You are viewing Keerthipriya's portfolio. She's a software developer focused on Salesforce, with over six years of experience working across Sales Cloud, Service Cloud, Experience Cloud, and Field Service. She also build web applications using JavaScript, Java and PHP. She is eager to solve problems passionately and enjoy learning and sharing knowledge with others.";
     heroSpeechState.defaultVoice = getPreferredHeroVoice();
     const utterance = createUtterance(introText, heroSpeechState.defaultVoice);
     heroSpeechState.utterance = utterance;

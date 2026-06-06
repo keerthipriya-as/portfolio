@@ -204,6 +204,55 @@ body {
     font-size: 1rem;
 }
 
+/* Layout: make hero graphic appear inline on wider screens, stacked on small screens */
+.hero-section .intro-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* children full-width on small screens */
+@media (max-width: 899px) {
+  .hero-section .intro-text > * {
+    width: 100%;
+  }
+  .hero-image-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero-section .intro-text {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+  }
+  /* allow text column to take available space while keeping avatar fixed size */
+  .hero-section .intro-text > *:not(.hero-graphic) {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .hero-graphic {
+    margin: 0 0 0 24px;
+    align-self: flex-start;
+  }
+
+  /* Desktop: place the photo and its caption in a centered vertical card */
+  .hero-image-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: auto;
+    flex: none;
+    margin-right: 14px;
+  }
+}
+
 .hero-graphic {
     display: inline-flex;
     flex-direction: column;
@@ -353,6 +402,56 @@ body {
     }
 }
 
+@media (min-width: 900px) {
+  .hero-image-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 280px;
+    min-width: 280px;
+  }
+  .hero-image-section img {
+    width: 260px;
+    height: 260px;
+    border-radius: 16px;
+  }
+  .animated-intro {
+    width: 100%;
+    text-align: center;
+  }
+  .hero-image-section .name-title {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+  .hero-image-section .fade-text {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.9);
+    display: block;
+    width: 100%;
+    min-height: 2.6rem;
+    white-space: normal;
+  }
+}
+
+/* Favicon shown above hero intro (web only styling handled by layout) */
+.hero-image-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+.hero-image-section img {
+
+  border-radius: 12px;
+  border: 2px solid rgba(255,255,255,0.18);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  background: white;
+}
+
+/* Duplicate action buttons inside hero-graphic: hidden by default, shown on wider screens */
+/* Keep a single action button row shown regardless of screen size */
+/* The action-buttons block below the hero content handles both mobile and desktop. */
+
 /* Chatbot widget */
 .chatbot-wrapper {
   position: fixed;
@@ -421,6 +520,23 @@ body {
     justify-content: center;
     gap: 15px;
 }
+
+/* When action-buttons are placed under the avatar card keep spacing */
+.hero-buttons-below-avatar {
+  margin-top: 12px;
+}
+
+@media (min-width: 900px) {
+  /* keep buttons aligned with the avatar card width on desktop */
+  .hero-graphic .action-buttons {
+    width: 100%;
+    max-width: 260px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* end of action-buttons/avatar layout rules */
 
 .btn {
     padding: 10px 20px;
