@@ -230,8 +230,14 @@ document.addEventListener("DOMContentLoaded", function () {
             else if (t.includes('experience') || t.includes('exp')) reply = 'I have 6+ years experience across Sales, Service, Experience Clouds and Field Service, working on custom development, integrations, and web applications.';
             else if (t.includes('contact') || t.includes('email') || t.includes('phone')) reply = 'You can reach me at askeerthipriya99@gmail.com or +91 7010481281.';
             else if (t.includes('keerthi') || t.includes('priya') || t.includes('keerthipriya')) reply = 'That\'s me! I\'m Keerthipriya, a passionate software developer focused on Salesforce and web technologies. I love solving problems and learning new things.';
-            else if (t.includes('hi') || t.includes('hello') || t.includes('hey')) reply = 'Hey! you can ask me about my skills, experience, or how to contact me not any other questions please..! It\'s a simple chatbot built in javascript to demonstrate interactivity on my portfolio site.';
-            
+            else if (t.includes('hi') || t.includes('hello') || t.includes('hey')) reply = 'Hey! you can ask me about my skills, experience, or how to contact me. It\'s a simple chatbot built in javascript to demonstrate interactivity on my portfolio site.';
+            else if (t.includes('nice') || t.includes('good') || t.includes('great') || t.includes('awesome') || t.includes('cool') || t.includes('lovely') || t.includes('super') || t.includes('beautiful') || t.includes('fantastic') ) reply = 'Thank you! I\'m glad you like it. Feel free to explore the site and let me know if you have any questions!';
+            else if (t.includes('thanks') || t.includes('thank you')) reply = 'You\'re welcome! Is there anything else you\'d like to know about me? You can ask about my skills, experience, or how to contact me.';
+            else if (t.includes('bye') || t.includes('goodbye')) reply = 'Goodbye! Feel free to come back if you have more questions.';
+            else if (t.includes('oh') || t.includes('oh no')) reply = 'If you have any questions about my skills or experience, just ask!';
+            else if (t.includes('what is your name') || t.includes('your name') || t.includes('who are you')) reply = 'I\'m Keerthipriya, a software developer.';
+            else if (t.includes('welcome')) reply = 'Is there anything else you\'d like to know about me? You can ask about my skills, experience, or how to contact me.';
+
             setTimeout(()=> appendMessage(reply, 'bot'), 700);
         }
 
