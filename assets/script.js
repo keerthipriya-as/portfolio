@@ -181,3 +181,66 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+    //chat bot
+    (function setupChatbot(){
+        const toggle = document.getElementById('chatToggle');
+        const windowEl = document.getElementById('chatWindow');
+        const closeBtn = document.getElementById('chatClose');
+        const form = document.getElementById('chatForm');
+        const input = document.getElementById('chatInput');
+        const messages = document.getElementById('chatMessages');
+
+        if (!toggle || !windowEl || !form || !input || !messages) return;
+
+        function openChat(){
+            windowEl.classList.add('open');
+            windowEl.setAttribute('aria-hidden','false');
+            toggle.style.display = 'none';
+            input.focus();
+        }
+        function closeChat(){
+            windowEl.classList.remove('open');
+            windowEl.setAttribute('aria-hidden','true');
+            toggle.style.display = '';
+            toggle.focus();
+        }
+
+        toggle.addEventListener('click', function(){
+            if (windowEl.classList.contains('open')) closeChat(); else openChat();
+        });
+        closeBtn.addEventListener('click', function () {
+            const messagesEl = document.getElementById('chatMessages');
+            if (messagesEl) messagesEl.innerHTML = '';
+            closeChat();
+        });
+
+        function appendMessage(text, who){
+            const el = document.createElement('div');
+            el.className = 'chat-bubble ' + (who==='user' ? 'user' : 'bot');
+            el.textContent = text;
+            messages.appendChild(el);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function botReply(userText){
+            
+            const t = userText.toLowerCase();
+            let reply = "Sorry, I didn't get that. Try asking about skills, experience, or contact.";
+            if (t.includes('skill') || t.includes('skills') || t.includes('knowledge')) reply = 'I am skilled in Salesforce Configurations and platform development including Apex, Aura, Visualforce, Lightning Web Components, and integrations. I also have experience in Html, CSS, Javascript, Java and PHP for web development.';
+            else if (t.includes('experience') || t.includes('exp')) reply = 'I have 6+ years experience across Sales, Service, Experience Clouds and Field Service, working on custom development, integrations, and web applications.';
+            else if (t.includes('contact') || t.includes('email') || t.includes('phone')) reply = 'You can reach me at askeerthipriya99@gmail.com or +91 7010481281.';
+            else if (t.includes('hi') || t.includes('hello') || t.includes('hey')) reply = 'Hey! you can ask me about my skills, experience, or how to contact me not any other questions please..! It\'s a simple chatbot built in javascript to demonstrate interactivity on my portfolio site.';
+
+            setTimeout(()=> appendMessage(reply, 'bot'), 700);
+        }
+
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            const text = input.value.trim();
+            if (!text) return;
+            appendMessage(text, 'user');
+            input.value = '';
+            botReply(text);
+        });
+    })();
+
