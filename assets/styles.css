@@ -406,7 +406,7 @@ body {
   background: #fafafa;
 }
 
-.chat-bubble { margin-bottom:10px; display:inline-block; max-width:80%; padding:10px 12px; border-radius:12px;}
+.chat-bubble { margin-bottom:10px; display: table; clear: both; max-width:80%; padding:10px 12px; border-radius:12px;}
 .chat-bubble.bot { background:#fff; color:#222; box-shadow:0 6px 14px rgba(0,0,0,0.06); }
 .chat-bubble.user { background:#4a69bd; color:#fff; margin-left:auto; }
 
